@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Hytale Community Translation - Converter</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="./css/styles.css">
+  </head>
+  <body>
+    <main>
+      <div class="header">
+        <div class="image-container">
+          <img src="./img/hytale.png" alt="Hytale Community Translation">
+        </div>
+        <div class="title">Hytale Community Translation Converter</div>
+      </div>
+
+      	<div class="tabs-content">
+          <ul class="tabs">
+            <li><a href="#convert">Convert</a></li>
+            <li><a href="#download">Download</a></li>
+            <li><a href="#about">About</a></li>
+          </ul>
+
+          <div class="contents">
+            <section class="tab-content active" id="convert">
+
+              <div class="info-section">
+                <p class="text">
+                Download the JSON translation files from the
+                <a href="https://crowdin.com/project/hytale-community-translation/" target="_blank">
+                Hytale Community Translation Project
+                </a>
+                on Crowdin, then upload them here.
+                </p>
+
+                <p class="text">
+                Choose the target language you want to convert to, and click the <strong>Convert</strong> button to begin.
+                </p>
+
+                <p class="text">
+                The conversion will generate <code>.lang</code> files. These files must be placed in the game's language directory.
+                </p>
+
+                <p class="text">
+                If you installed the game in the default location, press <strong>Win + R</strong>, then paste the following path into the dialog and press Enter:
+                <code class="copy">%AppData%\Hytale\install\release\package\game\latest\Client\Data\Shared\Language</code> (click to copy)
+                </p>
+
+                <p class="text">
+                Inside the <code>Language</code> directory, place the generated file into the appropriate language folder.
+                If the folder does not exist, create one using the language code as the folder name (for example: <code>fr-FR</code>).
+                </p>
+
+                <p class="text">
+                Once complete, launch the game and select the new language from the language selection menu.
+                </p>
+              </div>
+
+              <div class="language-selector">
+                <label for="languageSelect">Language</label>
+                <select id="languageSelect">
+                  <option value="">-- Select language --</option>
+
+                  <option value="Afrikaans">Afrikaans</option>
+                  <option value="العربية">العربية</option>
+                  <option value="Català">Català</option>
+                  <option value="中文（简体）">中文（简体）</option>
+                  <option value="中文（繁體）">中文（繁體）</option>
+                  <option value="Čeština">Čeština</option>
+                  <option value="Dansk">Dansk</option>
+                  <option value="Français">Français</option>
+                  <option value="Deutsch">Deutsch</option>
+                  <option value="Ελληνικά">Ελληνικά</option>
+                  <option value="עברית">עברית</option>
+                  <option value="Magyar">Magyar</option>
+                  <option value="Italiano">Italiano</option>
+                  <option value="日本語">日本語</option>
+                  <option value="한국어">한국어</option>
+                  <option value="Nederlands">Nederlands</option>
+                  <option value="Norsk">Norsk</option>
+                  <option value="Polski">Polski</option>
+                  <option value="Português">Português</option>
+                  <option value="Português Brasileiro">Português Brasileiro</option>
+                  <option value="Română">Română</option>
+                  <option value="Русский">Русский</option>
+                  <option value="Español">Español</option>
+                  <option value="Svenska">Svenska</option>
+                  <option value="Suomi">Suomi</option>
+                  <option value="Türkçe">Türkçe</option>
+                  <option value="Українська">Українська</option>
+                  <option value="Tiếng Việt">Tiếng Việt</option>
+                </select>
+              </div>
+
+              <div class="file-container">
+                <h2>Client</h2>
+                <div class="file-row">
+                  <div class="drop-box" data-type="client-json">client.json</div>
+                  <div class="drop-box optional" data-type="client-lang">client.lang (optional)</div>
+                </div>
+              </div>
+
+              <div class="file-container">
+                <h2>Server</h2>
+
+                <div class="file-row">
+                  <div class="drop-box" data-type="server-json">server.json</div>
+                  <div class="drop-box optional" data-type="server-lang">server.lang (optional)</div>
+                </div>
+
+                <button id="convertAll" disabled>
+                  <span class="button__inner">
+                    <span class="button__inner__label">Convert</span>
+                    <span class="button__inner__highlight"></span>
+                  </span>
+                </button>
+              </div>
+
+              <input type="file" id="hiddenInput" hidden>
+            </section>
+
+            <section class="tab-content" id="download">
+              <div class="info-section">
+                <p class="text">Here you can download the complete translations as zip files, just extract them in the language folder.</p>
+              </div>
+
+              <div class="files-list">
+                <div class="block">
+                  <div class="title">Português Brasileiro (100%)</div>
+                  <a href="/files/pt-BR.zip" download>Download</a>
+                </div>
+              </div>
+            </section>
+
+            <section class="tab-content" id="about">
+              <div class="info-section">
+                <p class="text">
+                This tool is a community-driven project aimed at translating the Hytale into multiple languages.
+                </p>
+
+                <p class="text">
+                It is not affiliated with, associated with, authorized by, endorsed by, or officially connected to
+                <a href="https://hytale.com/" target="_blank">Hytale</a> or its developers.
+                </p>
+
+                <p class="text">
+                All translations are created and maintained by the community and are not officially endorsed by Hytale.
+                </p>
+
+                <!-- <p class="text">
+                If you have any questions or feedback, please join the
+                <a href="https://discord.gg/hytale" target="_blank">Hytale Discord</a>
+                and ask in the <code>#translations</code> channel.
+                </p> -->
+                </div>
+            </section>
+
+          </div>
+        </div>
+    </main>
+    <footer>
+      <div class="footer-content">
+        All assets, images, texts and all related trademarks and logos are trademarks of HYPIXEL STUDIOS ©2026 HYPIXEL STUDIOS CANADA INC. All Rights Reserved.
+        We are not affiliated, associated, authorized, endorsed by, or in any way officially connected with any of the listed companies.
+      </div>
+    </footer>
+    <script src="./js/script.js"></script>
+  </body>
+</html>
