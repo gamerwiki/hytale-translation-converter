@@ -14,11 +14,13 @@ body {
   color: #eee;
   padding: 0;
   margin: auto;
-  position: fixed;
   top: 0;
   left: 0;
   bottom: 0;
   right: 0;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
 }
 
 main {
@@ -26,13 +28,21 @@ main {
   width: 100%;
   max-width: 940px;
   font-family: "Lexend", sans-serif;
+  margin-bottom: 2rem;
 }
 
 .image-container {
   display: flex;
   align-items: center;
   justify-content: center;
-  width: 300px;
+  width: 100%;
+  height: 150px;
+}
+
+.image-container img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
 }
 
 .header {
@@ -284,11 +294,11 @@ footer {
   color: rgb(183 206 221 / 70%);
   letter-spacing: 0.05em;
   line-height: 1.25rem;
-  position: fixed;
-  bottom: 0;
-  padding: 1.5rem 1rem;
+  padding: 1.5rem 0;
   width: 100%;
   font-size: 0.875rem;
+  position: relative;
+  margin-top: auto;
 }
 
 .footer-content {
@@ -369,8 +379,8 @@ footer {
   /* Safari and Chrome */
   -o-animation: fadein .5s;
   /* Opera */
-  padding: 0 1rem;
-  background-color: #16203991;
+  padding: 0.5rem 1rem;
+  background-color: rgb(22 32 57 / 70%);
 }
 
 .tab-content.active {
