@@ -2,6 +2,8 @@ const hiddenInput = document.getElementById("hiddenInput");
 const convertAllBtn = document.getElementById("convertAll");
 const languageSelect = document.getElementById("languageSelect");
 
+const BASE_PATH = "/hytale-translation-converter";
+
 const state = {
   client: { json: null, lang: null },
   server: { json: null, lang: null }
@@ -14,9 +16,12 @@ const REQUIRED_FILENAMES = {
   "server-lang": "server.lang"
 };
 
-/* ===========================
-   Helpers
-   =========================== */
+function getBasePath() {
+  if (window.location.hostname.includes("github.io")) {
+    return BASE_PATH;
+  }
+  return "";
+}
 
 function readFile(file) {
   return new Promise((res, rej) => {
@@ -28,9 +33,13 @@ function readFile(file) {
 }
 
 async function fetchFallbackLang(path) {
-  const r = await fetch(path);
-  if (!r.ok) throw new Error("Failed to load fallback lang");
-  return await r.text();
+  // Prepend the correct base path automatically
+  const fullPath = `${getBasePath()}${path.startsWith("/") ? "" : "/"}${path}`;
+  
+  const response = await fetch(fullPath);
+  if (!response.ok) throw new Error(`Failed to load fallback lang: ${fullPath}`);
+  
+  return await response.text();
 }
 
 function updateConvertButton() {
@@ -38,10 +47,6 @@ function updateConvertButton() {
     state.client.json || state.server.json
   );
 }
-
-/* ===========================
-   Core Conversion
-   =========================== */
 
 function jsonToLangFromOriginal(originalLangText, translations) {
   const originalLines = originalLangText.split(/\r?\n/);
@@ -92,10 +97,6 @@ function jsonToLangFromOriginal(originalLangText, translations) {
   return output.join("\n");
 }
 
-/* ===========================
-   Drop Box Logic
-   =========================== */
-
 document.querySelectorAll(".drop-box").forEach(box => {
   const type = box.dataset.type;
 
@@ -125,7 +126,6 @@ async function handleFile(type, file, box) {
   const requiredName = REQUIRED_FILENAMES[type];
 
   if (file.name !== requiredName) {
-    // 🔴 Visual error feedback
     box.classList.add("error");
     setTimeout(() => box.classList.remove("error"), 800);
 
@@ -152,10 +152,6 @@ async function handleFile(type, file, box) {
   box.textContent = file.name;
   box.classList.add("loaded");
 }
-
-/* ===========================
-   Convert All
-   =========================== */
 
 async function convertScope(scope, fallbackPath, outputName) {
   const json = state[scope].json;
@@ -242,21 +238,14 @@ if (hash) {
 function tabContent(element) {
   const tabbedContent = document.querySelector(element);
   const tabLinks = tabbedContent.querySelectorAll(".tabs a");
-
-  // Set first tab as active
   if (tabLinks.length > 0) {
     tabLinks[0].classList.add("active");
   }
 
   tabLinks.forEach(tablink => tablink.addEventListener("click", e => {
-    // Remove active class from all tabs
     tabLinks.forEach(tab => tab.classList.remove("active"));
-    // Add active class to clicked tab
     tablink.classList.add("active");
-
-    // Hide all tab content
     tabbedContent.querySelectorAll(".tab-content").forEach(tab => tab.classList.remove("active"));
-    // Show the selected tab content
     tabbedContent.querySelector(tablink.getAttribute('href')).classList.add("active");
   }));
 }

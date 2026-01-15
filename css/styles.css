@@ -6,7 +6,7 @@ body {
   line-height: 1.5;
   color: #24292e;
   background-color: #162039;
-  background-image: url(./img/hytale-bg.jpg);
+  background-image: url(/img/hytale-bg.jpg);
   background-size: cover;
   background-position: top center;
   background-repeat: no-repeat;
