@@ -26,6 +26,15 @@ languages.forEach(lang => {
   link.textContent = `Download ${lang.name}`;
   link.style.display = "block";
 
+  link.addEventListener("click", () => {
+    gtag('event', 'file_download', {
+      'file_extension': 'zip',
+      'file_name': `${lang.code}.zip`,
+      'language_name': lang.name,
+      'link_url': link.href
+    });
+  });
+
   block.appendChild(title);
   block.appendChild(link);
 
@@ -209,6 +218,11 @@ function downloadFile(content, filename) {
 }
 
 convertAllBtn.addEventListener("click", async () => {
+  gtag('event', 'convert_files', {
+    'event_category': 'conversion',
+    'event_label': 'Language Converter',
+    'target_language': languageSelect.value // Optional: track which language was selected
+  });
   // Client
   await convertScope(
     "client",
