@@ -2,7 +2,35 @@ const hiddenInput = document.getElementById("hiddenInput");
 const convertAllBtn = document.getElementById("convertAll");
 const languageSelect = document.getElementById("languageSelect");
 
+const VERSION = "1.0.1";
+const versionEl = document.querySelector(".version");
+versionEl.textContent = `v. ${VERSION}`;
+
 const BASE_PATH = "/hytale-translation-converter";
+
+const languages = [
+  { name: "Português Brasileiro", code: "pt-BR", percent: 100 },
+];
+const container = document.getElementById("downloads");
+
+languages.forEach(lang => {
+  const block = document.createElement("div");
+  block.className = "block";
+
+  const title = document.createElement("div");
+  title.className = "title";
+  title.textContent = `${lang.name} (${lang.percent}%)`;
+  const link = document.createElement("a");
+  link.href = `${getBasePath()}/files/${lang.code}.zip`;
+  link.download = `${lang.code}.zip`;
+  link.textContent = `Download ${lang.name}`;
+  link.style.display = "block";
+
+  block.appendChild(title);
+  block.appendChild(link);
+
+  container.appendChild(block); 
+});
 
 const state = {
   client: { json: null, lang: null },
